@@ -18,6 +18,20 @@ const Input = ({ label,placeholder, ...props }: any) => (
   </div>
 )
 export default function InputFields() {
+
+    const [backendRunning,setBackendRunning] = React.useState<boolean>(false)
+    useEffect(() => {
+      const checkBackend = async() => {
+        try {
+          const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}`)
+          if(data) setBackendRunning(true)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      checkBackend()
+    },
+    [])
   
     const initialData:any = [
       {label: "Marital Status", placeholder: "Marital Status", value: "user_marital_status",type:'select',options:['Single','Married','Divorced','Widowed']},
@@ -125,8 +139,15 @@ export default function InputFields() {
     },1000)
 
   }
+  if(!backendRunning) return (<div>
+
+<h3 className='text-2xl font-bold'>Backend is not running </h3>
+<p>Please try again in 5 minutes</p>
+  </div>)
   return (
     <div className='w-full  bg-gray-100 p-4 rounded-md flex flex-col gap-y-4'>
+            <h2 className='text-4xl mb-8 font-bold text-center'>Lenny Loan App</h2>
+
        <div className='grid grid-cols-2 gap-4'>
        {initialData.map((item:any,index:number) => {
           if(item.type === 'select'){

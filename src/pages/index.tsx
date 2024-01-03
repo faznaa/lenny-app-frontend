@@ -9,7 +9,6 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col text-black items-center justify-between p-24 bg-white ${inter.className}`}
     >
-      <h2 className='text-4xl mb-8 font-bold text-center'>Lenny Loan App</h2>
       <InputFields />
 
       
