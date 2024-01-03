@@ -22,7 +22,7 @@ export default function InputFields() {
     const initialData:any = [
       {label: "Marital Status", placeholder: "Marital Status", value: "user_marital_status",type:'select',options:['Single','Married','Divorced','Widowed']},
       {label: "Credit Score", placeholder: "Credit Score", value: "user_credit_score"},
-      {label: "Housing Situation", placeholder: "Housing Situation", value: "user_housing_situation"},
+      {label: "Housing Situation", placeholder: "Housing Situation", value: "user_housing_situation", type:'select',options:['Renting','Mortgage','Own']},
       {label: "Monthly Income", placeholder: "Monthly Income", value: "user_monthly_income"},
       {label: "Loan Amount Requested", placeholder: "Loan Amount Requested", value: "loan_amount_requested"},
       {label: "Loan Term", placeholder: "Loan Term", value: "loan_term"},
@@ -52,23 +52,15 @@ export default function InputFields() {
   // },
     const [loans, setLoans] = React.useState<any>([
       {
-          lender: "ABC",
-          amount: "25000",
-          interest_rate: "12",
-          term: "15",
-          repayment_amount: "",
-          repayment_frequency: "3 months",
-          loan_conditions: "",
-      },
-      {
-        lender: "JUT",
-        amount: "14000",
-        interest_rate: "8",
-        term: "25",
-        repayment_amount: "",
-        repayment_frequency: "1 month",
-        loan_conditions: "",
-    },
+            lender: "",
+            amount: "",
+            interest_rate: "",
+            term: "",
+            repayment_amount: "",
+            repayment_frequency: "",
+            loan_conditions: "",
+        },
+      
   ])
   // user_marital_status: "",
   // user_credit_score: "",
@@ -81,16 +73,16 @@ export default function InputFields() {
   // loan_security: "",
   // loan_additional_notes: "",
     const [data,setData] = React.useState<any>({
-        user_marital_status: "Married",
-        user_credit_score: "675",
-        user_housing_situation: "Rent",
-        user_monthly_income: "3000",
-        loan_amount_requested: "20000",
-        loan_term: "20",
-        loan_payment_frequency: "6 month",
-        loan_purpose: "Housing Loan",
-        loan_security: "none",
-        loan_additional_notes: "",
+       user_marital_status: "",
+      user_credit_score: "",
+      user_housing_situation: "",
+      user_monthly_income: "",
+      loan_amount_requested: "",
+      loan_term: "",
+      loan_payment_frequency: "",
+      loan_purpose: "",
+      loan_security: "",
+      loan_additional_notes: "",
         
     })
   const updateData = (e:any) => {
@@ -153,7 +145,7 @@ export default function InputFields() {
         })}
        </div>
 
-<button onClick={()=>addLoan()}className='bg-blue-500 text-white p-2 max-w-sm rounded-md'>Add Loan</button>
+       <h2 className='text-2xl font-bold'>Loans Approved</h2>
 
         <div className='grid grid-cols-2 gap-6'>
         {loans.map((loan:any,index:number) => {
@@ -170,6 +162,8 @@ export default function InputFields() {
           )
         })}
         </div>
+        <button onClick={()=>addLoan()} className='my-6 bg-blue-500 text-white p-2 max-w-sm rounded-md'>Add Loan</button>
+
 
         <button onClick={()=>getResponse()} className='bg-blue-500 text-white p-2 max-w-sm rounded-md'>Submit</button>
         {response?.assessment && <div>
